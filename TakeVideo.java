@@ -16,6 +16,15 @@ import com.xuggle.xuggler.video.ConverterFactory;
 import com.xuggle.xuggler.video.IConverter;
 import com.xuggle.xuggler.IPixelFormat;
 
+/**
+Class for creating a thread to receive video from default webcam and store to a file in
+source directory. Works alongside cam_gui.class to write videos to a file in a thread
+so multiple instances of video can be taken and put into the Footage object.
+
+Created by: Tommy Margolis, Daylon Blakely, and Thomas Hwang
+
+ */
+
 class TakeVideo extends Thread{
 	private Webcam webcam;
 	private JLabel imageLabel;
@@ -26,6 +35,7 @@ class TakeVideo extends Thread{
 	}
 	
 	public void run() {
+		//Create a new file in source
 		File fileOut = new File("new_vid.mp4");
 		IMediaWriter writer = ToolFactory.makeWriter(fileOut.getName());
 		

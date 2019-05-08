@@ -1,8 +1,14 @@
 import java.util.*;
 import java.io.File;
 
-/*Footage object used for handling the saving of video
- * data. Stores an array of files in a linked list.*/
+/**
+Footage object used for handling the saving of video data. Stores an array of files in a linked list.
+ Methods include functionality for insertion of entire file arrays, insertion of individual file elements
+ to specified file arrays, retrieval of segments and stories (file arrays) requested.
+
+Created by: Tommy Margolis, Daylon Blakely, and Thomas Hwang
+
+ * */
 public class Footage {
 	//Local split video container of files
 	private LinkedList<File[]> splitVids = new LinkedList<File[]>();
@@ -39,5 +45,9 @@ public class Footage {
 	//Return the segment of video in the story at parameters 
 	File get_segment(int story, int index) {
 		return splitVids.get(story)[index];
+	}
+	//Return the story (file array) at parameter requested 
+	File get_segment(int story) {
+		return splitVids.get(story);
 	}
 }
