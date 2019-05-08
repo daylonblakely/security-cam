@@ -45,14 +45,16 @@ class TakeVideo extends Thread{
 		long start = System.currentTimeMillis();
 		
 		while(cam_Gui.isRunning) {
+			//while webcam is running, convert image to buffered image that can be converted to a frame
 			BufferedImage image = ConverterFactory.convertToType(webcam.getImage(), BufferedImage.TYPE_3BYTE_BGR);
 			IConverter converter = ConverterFactory.createConverter(image, IPixelFormat.Type.YUV420P);
+			//displays video by changing the JLabel in cam_gui
 			imageLabel.setIcon(new ImageIcon(image));
 			
-
+			//converte image to a frame that will be encoded to mp4
 			IVideoPicture frame = converter.toPicture(image, (System.currentTimeMillis() - start) * 1000);
 			frame.setQuality(100);
-
+			//encode frame to mp4
 			writer.encodeVideo(0, frame);			
 		}
 		writer.close();
