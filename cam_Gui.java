@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class cam_Gui extends JFrame {
-
+	
 	private JPanel contentPane;
 	Webcam webcam;
 	JLabel imageLabel;
@@ -43,22 +43,26 @@ public class cam_Gui extends JFrame {
 	 * Create the frame.
 	 */
 	public cam_Gui() {
+		//set dimensions of JFrame content
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 657, 566);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		isRunning=false;
 		imageLabel = new JLabel("");
 		imageLabel.setBounds(0, 0, 640, 480);
 		contentPane.add(imageLabel);
 		
+		isRunning=false;
+		//create capture button
 		JButton btnCapture = new JButton("Capture");
+		//when capture button is pressed change value of isRunning
 		btnCapture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(!isRunning) {
 					isRunning=true;
+					//when is running== true start a new TakeVideo thread to display and save webcam footage
 					new Thread(new TakeVideo(webcam, imageLabel)).start();
 				}
 				else {
@@ -68,8 +72,9 @@ public class cam_Gui extends JFrame {
 		});
 		btnCapture.setBounds(269, 481, 97, 25);
 		contentPane.add(btnCapture);
-		
+		//use default web cam
 		webcam = Webcam.getDefault();
+		//set size of the webacam image
 		webcam.setViewSize(WebcamResolution.VGA.getSize());
 		webcam.open();
 	}
